@@ -5,11 +5,24 @@ import random
 from typing import Tuple
 sys.path.append(os.path.join(os.getcwd(),'python/'))
 
+<<<<<<< HEAD
 
 from time import sleep
 import darknet as dn
 import pdb
 from threading import Thread
+=======
+<<<<<<< Updated upstream
+import darknet as dn
+import pdb
+=======
+
+from time import sleep
+import darknet as dn
+import pdb
+from threading import Thread
+>>>>>>> Stashed changes
+>>>>>>> master
 
 
 __author__ = 'ING_DS_TECH'
@@ -19,13 +32,27 @@ FORMAT = '%(asctime)-15s %(levelname)s %(message)s'
 logging.basicConfig(format=FORMAT, level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+input_dir = "/home/wolny/Documents/workspace/Hackathon/2019/main/src/validation"
+#input_dir = "/home/achillesv/Desktop/HACK/test_dataset/"
+answers_file = "Main.csv"
+=======
+>>>>>>> master
 #input_dir = "/home/wolny/Documents/workspace/Hackathon/2019/main/src/validation"
 input_dir = "/home/achillesv/Desktop/HACK/test_dataset/"
 odp_input="./odp/"
 answers_file="main.csv"
 net = dn.load_net(b"yolov3.cfg", b"yolov3.weights", 0)
 meta = dn.load_meta(b"coco.data")
+<<<<<<< HEAD
 
+=======
+# net = dn.load_net(b"yolo9000.cfg", b"yolo9000.weights", 0)
+# meta = dn.load_meta(b"combine9k.data")
+>>>>>>> Stashed changes
+>>>>>>> master
 
 labels_task_1 = ['Bathroom', 'Bathroom cabinet', 'Bathroom sink', 'Bathtub', 'Bed', 'Bed frame',
                  'Bed sheet', 'Bedroom', 'Cabinetry', 'Ceiling', 'Chair', 'Chandelier', 'Chest of drawers',
@@ -55,7 +82,17 @@ def task_1(partial_output: dict, file_path: str) -> dict:
     #
     #
 
+<<<<<<< HEAD
     print(dn.detect(net, meta, file_path.encode()))
+=======
+<<<<<<< Updated upstream
+    net = dn.load_net(b"yolov3.cfg", b"yolov3.weights", 0)
+    meta = dn.load_meta(b"coco.data")
+    dn.detect(net, meta, file_path.encode())
+=======
+    print(dn.detect(net, meta, file_path.encode()))
+>>>>>>> Stashed changes
+>>>>>>> master
 
     logger.debug("Done with Task 1 for file {0}".format(file_path))
     return partial_output
