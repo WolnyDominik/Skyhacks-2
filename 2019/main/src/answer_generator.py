@@ -1,8 +1,13 @@
 import csv
-import os
+import sys, os
 import logging
 import random
 from typing import Tuple
+sys.path.append(os.path.join(os.getcwd(),'python/'))
+
+import darknet as dn
+import pdb
+
 
 __author__ = 'ING_DS_TECH'
 __version__ = "201909"
@@ -11,7 +16,8 @@ FORMAT = '%(asctime)-15s %(levelname)s %(message)s'
 logging.basicConfig(format=FORMAT, level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-input_dir = "/home/achillesv/Desktop/HACK/test_dataset/"
+input_dir = "/home/wolny/Documents/workspace/Hackathon/2019/main/src/validation"
+#input_dir = "/home/achillesv/Desktop/HACK/test_dataset/"
 answers_file = "Main.csv"
 
 labels_task_1 = ['Bathroom', 'Bathroom cabinet', 'Bathroom sink', 'Bathtub', 'Bed', 'Bed frame',
@@ -41,6 +47,11 @@ def task_1(partial_output: dict, file_path: str) -> dict:
     #	HERE SHOULD BE A REAL SOLUTION
     #
     #
+
+    net = dn.load_net(b"yolov3.cfg", b"yolov3.weights", 0)
+    meta = dn.load_meta(b"coco.data")
+    dn.detect(net, meta, file_path.encode())
+
     logger.debug("Done with Task 1 for file {0}".format(file_path))
     return partial_output
 

@@ -1,10 +1,4 @@
-Additional task
-
-Welcome to a marvellous world of real estate. All of our consultants are currently busy, so you’ll have to help yourselves.
-Inside “input” folder you’ll find 3 sample test sets. Each set consists of multiple files:
--	Jpg files with pictures
--	Json files with tags describing each picture
--	Summary file in which every picture is labelled to a correct room class
-Your task is to prepare a brochure/flyer/offer. Make it graphical and modern. Use NLP and text generation methods to utilise metadata and provide a human readable (and well composed!) description of each test set (assume that each test set is a separate flat and you have pictures of all rooms).
-Generate your answer into a PDF file (one page per each test set).
-No cheating please! During evaluation phase you will get a folder with same structure as "input" directory. Your solution has to generate the mentioned PDF file on the fly.
+ÑW(q7X~6ÿ¦›Û“Tê~K9ÊÁ{{=fŒëÔô¯·&H‚,ß}¹xhÕhKXL³*@–á´VnªE1êô¨ÛÛ’†©Ç§b+:]l,Ç`Ò8Û^ùmÂvz1}‹¨"zÅaržµ	8Èˆæx†JÆ§y=•Úhc^”¯Þ|\D}’ZO–VËSÇ´M›Áó×æõÎïà¬Kæ­ÆP*«†qRõ¼F; a¾:Ÿ‘ÒÝ÷5)Re­²_À»‰°I¨„7ž³ö…RE"Ú:¢>9ÿå§Š6gƒžh Íé{»ÀÿÄÖt÷Ñ708\uWï.”WT¥¯Áé2þ¹¡Óñ=eµw£tEÏR‘õ0ERãF§iÈËÍ_A«4Öú9IÇ©èS‚uÂth Â>Æii2{èˆÊI9{í“åå2¡A·±˜@Ù§
+‹ÜHª‚™)²šÇ|ìz1¿¸¤’"®¥y—ãoa€\‘0L“‹™â#_ÙÊÊyîÉ£óu~|Wµ¸˜--JYóMUƒùw;–ÿ{P‡[²àŒce$—3šºåœ"÷È³’ÀŒ|žùšïG‘œÀ´Q6ÚLôÐ$¼éÜjÇŽºmÃâ”VÞ7;4Vv´ K£õ¦êÃPþ/ß9ÆÞa©ì×•¼µµK‹Cb
+SÍÁdIys’’ä¾3°1AÉ2„7ç-` ‘Kó@y$Ö#¥æŒ><RÆOMôçðI¡°*'2µßñËÓÐ~¯(8CQ©xò=¿ò@j^¨øÿB£W)¢z‚ƒ\¤SÖn5Íex´å&"Õûˆ½#%ðgµnkåã"äéú¥9zª‘	3y@½”±]OcùC÷)(5û(úÿ³,ÿÀï=uÓ×Y&==n—r³ÚÍ€­ÆaÏA8£QtÊ0
+™Í¼9PcqæßníyÍ?h”Ög³zK&	Û'Ü¸Ò<5hÉ"+ÆÍ„AecÛ®¢(Š¾—«$,ØöNÈÔÎ—N¨’qþœ½fgü„’–Á&›Þ`Ô’CWÓè¹Ë|LCŒ è]xGYƒåÒÇ7Ãœ-iàµžVA‰óCž1:Œt]|«äí¤ÚÕbùÆÆï½2´Æ¯¨ÇlÅ.œË5ÿò<{…ª¡Œ!Ú‰h~ojóÿKÿ•ÓÕ±Nr_>™
