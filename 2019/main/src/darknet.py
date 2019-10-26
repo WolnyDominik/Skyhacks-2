@@ -47,15 +47,9 @@ class METADATA(Structure):
     
 
 #lib = CDLL("/home/pjreddie/documents/darknet/libdarknet.so", RTLD_GLOBAL)
-<<<<<<< HEAD
+
 lib = CDLL("./libdarknet.so", RTLD_GLOBAL)
-=======
-<<<<<<< Updated upstream
-lib = CDLL("/home/wolny/Documents/workspace/yolo/darknet/libdarknet.so", RTLD_GLOBAL)
-=======
-lib = CDLL("./libdarknet.so", RTLD_GLOBAL)
->>>>>>> Stashed changes
->>>>>>> master
+
 lib.network_width.argtypes = [c_void_p]
 lib.network_width.restype = c_int
 lib.network_height.argtypes = [c_void_p]
@@ -141,29 +135,14 @@ def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
     num = pnum[0]
     if (nms): do_nms_obj(dets, num, meta.classes, nms);
 
-<<<<<<< HEAD
     res = []
     for j in range(num):
         for i in range(meta.classes):
             if dets[j].prob[i] > 0:
                 # b = dets[j].bbox
                 res.append(str(meta.names[i])[2:-1])
-=======
-<<<<<<< Updated upstream
-    for j in range(num):
-        for i in range(meta.classes):
-            if dets[j].prob[i] > 0:
-                b = dets[j].bbox
-                res = meta.names[i]
-=======
-    res = []
-    for j in range(num):
-        for i in range(meta.classes):
-            if dets[j].prob[i] > 0:
-                # b = dets[j].bbox
-                res.append(str(meta.names[i])[2:-1])
->>>>>>> Stashed changes
->>>>>>> master
+
+
     #res = sorted(res, key=lambda x: -x[1])
     free_image(im)
     free_detections(dets, num)
@@ -174,15 +153,9 @@ def main(arg):
 
     #file.writelines(arg.decode())
     r = detect(net, meta, arg)
-<<<<<<< HEAD
     file.writelines(r)
-=======
-<<<<<<< Updated upstream
-    file.writelines(str(r))
-=======
-    file.writelines(r)
->>>>>>> Stashed changes
->>>>>>> master
+ 
+
     
     file.close()
 
@@ -192,33 +165,13 @@ if __name__ == "__main__":
     #meta = load_meta("cfg/imagenet1k.data")
     #r = classify(net, meta, im)
     #print r[:10]
-<<<<<<< HEAD
+
     net = sys.argv[1]
     meta = sys.argv[2]
     main(sys.argv[3])
-=======
-<<<<<<< Updated upstream
-    net = load_net(b"yolo9000.cfg", b"yolo9000.weights", 0)
-    meta = load_meta(b"combine9k.data")
-    main(b'/home/wolny/Documents/workspace/Hackathon/2019/main/src/validation/0A8D1972C4C3830754B135FC956A5780FDF7D333.jpg')
-=======
-    net = sys.argv[1]
-    meta = sys.argv[2]
-    main(sys.argv[3])
->>>>>>> Stashed changes
->>>>>>> master
+
     #r = detect(net, meta, b"3.jpg")
     #print(r)
     
 
 # for x in os.listdir('sciezka')
-#
-<<<<<<< HEAD
-##
-=======
-<<<<<<< Updated upstream
-##
-=======
-##
->>>>>>> Stashed changes
->>>>>>> master

@@ -5,24 +5,12 @@ import random
 from typing import Tuple
 sys.path.append(os.path.join(os.getcwd(),'python/'))
 
-<<<<<<< HEAD
 
 from time import sleep
 import darknet as dn
 import pdb
 from threading import Thread
-=======
-<<<<<<< Updated upstream
-import darknet as dn
-import pdb
-=======
 
-from time import sleep
-import darknet as dn
-import pdb
-from threading import Thread
->>>>>>> Stashed changes
->>>>>>> master
 
 
 __author__ = 'ING_DS_TECH'
@@ -32,34 +20,23 @@ FORMAT = '%(asctime)-15s %(levelname)s %(message)s'
 logging.basicConfig(format=FORMAT, level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-input_dir = "/home/wolny/Documents/workspace/Hackathon/2019/main/src/validation"
-#input_dir = "/home/achillesv/Desktop/HACK/test_dataset/"
-answers_file = "Main.csv"
-=======
->>>>>>> master
 #input_dir = "/home/wolny/Documents/workspace/Hackathon/2019/main/src/validation"
 input_dir = "/home/achillesv/Desktop/HACK/test_dataset/"
 odp_input="./odp/"
 answers_file="main.csv"
 net = dn.load_net(b"yolov3.cfg", b"yolov3.weights", 0)
 meta = dn.load_meta(b"coco.data")
-<<<<<<< HEAD
 
-=======
 # net = dn.load_net(b"yolo9000.cfg", b"yolo9000.weights", 0)
 # meta = dn.load_meta(b"combine9k.data")
->>>>>>> Stashed changes
->>>>>>> master
+
 
 labels_task_1 = ['Bathroom', 'Bathroom cabinet', 'Bathroom sink', 'Bathtub', 'Bed', 'Bed frame',
                  'Bed sheet', 'Bedroom', 'Cabinetry', 'Ceiling', 'Chair', 'Chandelier', 'Chest of drawers',
                  'Coffee table', 'Couch', 'Countertop', 'Cupboard', 'Curtain', 'Dining room', 'Door', 'Drawer',
                  'Facade', 'Fireplace', 'Floor', 'Furniture', 'Grass', 'Hardwood', 'House', 'Kitchen',
                  'Kitchen & dining room table', 'Kitchen stove', 'Living room', 'Mattress', 'Nightstand',
-                 'Plumbing fixture', 'Property', 'Real estate', 'Refrigerator', 'Roof', 'Room', 'Rural area',
+                 'Plumbing fixture', 'Property', 'Real estate', 'Refrigerator', 'Roof', 'room', 'Rural area',
                  'Shower', 'Sink', 'Sky', 'Table', 'Tablecloth', 'Tap', 'Tile', 'Toilet', 'Tree', 'Urban area',
                  'Wall', 'Window']
 
@@ -68,31 +45,19 @@ labels_task2 = ['apartment', 'bathroom', 'bedroom', 'dinning_room', 'house', 'ki
 labels_task3_1 = [1, 2, 3, 4]
 labels_task3_2 = [1, 2, 3, 4]
 
-
-
+room_items=[]
+room_type=""
 
 def task_1(partial_output: dict, file_path: str) -> dict:
     logger.debug("Performing task 1 for file {0}".format(file_path))
 
     for label in labels_task_1:
-        partial_output[label] = 0
-    #file
-    #
-    #	HERE SHOULD BE A REAL SOLUTION
-    #
-    #
+        partial_output[label] = 1
+    
 
-<<<<<<< HEAD
-    print(dn.detect(net, meta, file_path.encode()))
-=======
-<<<<<<< Updated upstream
-    net = dn.load_net(b"yolov3.cfg", b"yolov3.weights", 0)
-    meta = dn.load_meta(b"coco.data")
-    dn.detect(net, meta, file_path.encode())
-=======
-    print(dn.detect(net, meta, file_path.encode()))
->>>>>>> Stashed changes
->>>>>>> master
+    
+
+
 
     logger.debug("Done with Task 1 for file {0}".format(file_path))
     return partial_output
@@ -100,50 +65,48 @@ def task_1(partial_output: dict, file_path: str) -> dict:
 
 def task_2(file_path: str) -> str:
     logger.debug("Performing task 2 for file {0}".format(file_path))
-       
-    if(("chair" or "table" and "sink") or 'refrigerator' or "toaster" or 'oven' or 'microwave')
+    
+    room_items=dn.detect(net, meta, file_path.encode())
+
+    if(("chair" in room_items or "table" in room_items and "sink" in room_items) or 'refrigerator' in room_items or "toaster"  in room_items or 'oven' in room_items or 'microwave' in room_items):
         
-        out = "kitchen"
+        room_type = "kitchen"
         
 
-    else if("car" or"bench" or "bicycle" or "motorbike" or "bus" or "train" or "truck" or "boat" or "traffic light" or "bird" or "kite")
+    elif("car" in room_items or"bench" in room_items or "bicycle" in room_items or "motorbike" in room_items or "bus" in room_items or "train" in room_items or "truck" in room_items or "boat" in room_items or "traffic light" in room_items or "bird" in room_items or "kite" in room_items):
         
-        out = "home"
+        room_type = "house"
         
-    else if("sofa" or "tvmonitor")
+    elif("sofa" in room_items or "tvmonitor" in room_items ):
         
-        out="salon"
+        room_type="living_room"
         
-    else if("chair" and "diningtable")
+    elif("chair" in room_items and "diningtable" in room_items):
         
-        out="dining room"
+        room_type="dinning_room"
         
-    else if("bed")
+    elif("bed" in room_items):
         
-        out="bedroom"
+        room_type="bedroom"
         
-    else if(("sink" and "toilet") or "toilet" or "toothbrush")
+    elif(("sink" in room_items and "toilet" in room_items) or "toilet" in room_items or "toothbrush" in room_items) :
         
-        out="bathroom"
+        room_type="bathroom"
         
-    else if("chair")
+    elif("chair" in room_items):
         
-        line = random.choice([random.choice(kitchen) + random.choice(salon) + random.choice(dining room)])
+        room_type = random.choice(["kitchen", "living_room", "dinning_room"])
         
-    else if("dining table")
+    elif("diningtable" in room_items):
+       
+        room_type = random.choice(["kitchen", "living_room", "dinning_room"])
         
-        line = random.choice([random.choice(kitchen) + random.choice(salon) + random.choice(dining room)])
+    else:
         
-    else if("dining table")
-        
-        line = random.choice([random.choice(kitchen) + random.choice(bathroom)])
-        
-    else
-        
-        line = random.choice([random.choice(kitchen) + random.choice(salon) + random.choice(dining room)+ random.choice(bathroom)])
+        room_type = random.choice(["kitchen", "living_room", "dinning_room", "bathroom"])
     
     logger.debug("Done with Task 1 for file {0}".format(file_path))
-    return labels_task2[random.randrange(len(labels_task2))]
+    return labels_task2[labels_task2.index(room_type)]
 
 
 def task_3(file_path: str) -> Tuple[str, str]:
