@@ -2,3 +2,7 @@
 2019/main/src/validation/
 
 *.jpg
+
+2019/main/src/odp/
+
+2019/main/src/yolov3.weights
