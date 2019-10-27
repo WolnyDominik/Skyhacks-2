@@ -187,6 +187,7 @@ def collect():
 
 
 if __name__ == "__main__":
+    input_dir = sys.argv[3]
     main(int(sys.argv[1]),int(sys.argv[2]))
     # thread0 = Thread(target = main,args=(0,2))
     # thread1 = Thread(target = main,args=(1,2))
