@@ -21,7 +21,7 @@ logging.basicConfig(format=FORMAT, level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 #input_dir = "/home/wolny/Documents/workspace/Hackathon/2019/main/src/validation"
-input_dir = "/home/achillesv/Desktop/HACK/test_dataset/"
+input_dir = "/home/marek/Pulpit/HACK/test_dataset/"
 odp_input="./odp/"
 answers_file="main.csv"
 net = dn.load_net(b"yolov3.cfg", b"yolov3.weights", 0)
@@ -42,71 +42,102 @@ labels_task_1 = ['Bathroom', 'Bathroom cabinet', 'Bathroom sink', 'Bathtub', 'Be
 
 labels_task2 = ['apartment', 'bathroom', 'bedroom', 'dinning_room', 'house', 'kitchen', 'living_room']
 
-labels_task3_1 = [1, 2, 3, 4]
-labels_task3_2 = [1, 2, 3, 4]
+labels_task3_1 = [4, 3, 3, 3, 3]
+labels_task3_2 = [3, 4, 4, 3, 3]
 
-room_items=[]
-room_type=""
+#room_items=[]
 
 def task_1(partial_output: dict, file_path: str) -> dict:
     logger.debug("Performing task 1 for file {0}".format(file_path))
 
+    print(partial_output['task2_class'])
+
+    tab = partial_output['task2_class']
+
+    partial_output['task2_class'] = partial_output['task2_class'][0]
+
     for label in labels_task_1:
-        partial_output[label] = 1
+        partial_output[label] = 0
+
+    #for label in labels_task_1:
+
+    if('bathroom' in tab):
+        for x in ["Sink","Bathroom","Bathroom cabinet","Bathroom sink","Bathtub","Shower","Tap","Toilet","Wall","Furniture","Floor","room","Property","Ceiling","Tile"]:
+            partial_output[x] = 1
     
-
+    elif ('bedroom' in tab):
+        for x in ["Bed","Bed frame","Bed sheet","Bedroom","Chest of drawers","Mattress","Furniture","Floor","room","Property","Ceiling"]:
+            partial_output[x] = 1
     
-
-
-
+    elif ('dinning_room' in tab):
+        for x in ["Chair","Table","Dining room","Tablecloth","Kitchen & dining room table","Furniture","Floor","room","Property","Ceiling"]:
+            partial_output[x] = 1
+    
+    elif ('house' in tab):
+        for x in ["House","Window","Door","Property","Real estate","Tree","Property","Rural area","Urban area","Facade","Grass","Roof","Sky"]:
+            partial_output[x] = 1
+    
+    elif ('kitchen' in tab):
+        for x in ["Tile","Chair","Cabinetry","Countertop","Cupboard","Dining room","Drawer","Furniture","Kitchen","Kitchen & dining room table","Kitchen stove","Refrigerator","Sink","Table","Tablecloth","Tap","Furniture","Floor","room","Property","Ceiling"]:
+            partial_output[x] = 1
+    
+    elif ('living_room' in tab):
+        for x in ["Tile","Living room","Chair","Cabinetry","Countertop","Cupboard","Dining room","Drawer","Furniture","Kitchen","Kitchen & dining room table","Kitchen stove","Refrigerator","Sink","Table","Tablecloth","Tap","Furniture","Floor","room","Property","Ceiling"]:
+            partial_output[x] = 1
+    
     logger.debug("Done with Task 1 for file {0}".format(file_path))
     return partial_output
 
 
 def task_2(file_path: str) -> str:
+    room_type=""
     logger.debug("Performing task 2 for file {0}".format(file_path))
     
     room_items=dn.detect(net, meta, file_path.encode())
 
-    if(("chair" in room_items or "table" in room_items and "sink" in room_items) or 'refrigerator' in room_items or "toaster"  in room_items or 'oven' in room_items or 'microwave' in room_items):
+    if((("chair" in room_items or "table" in room_items) and "sink" in room_items) or 'refrigerator' in room_items or "toaster"  in room_items or 'oven' in room_items or 'microwave' in room_items):
         
-        room_type = "kitchen"
+        room_type = ["kitchen"]
         
 
-    elif("car" in room_items or"bench" in room_items or "bicycle" in room_items or "motorbike" in room_items or "bus" in room_items or "train" in room_items or "truck" in room_items or "boat" in room_items or "traffic light" in room_items or "bird" in room_items or "kite" in room_items):
+    elif("car" in room_items or "bench" in room_items or "bicycle" in room_items or "motorbike" in room_items or "bus" in room_items or "train" in room_items or "truck" in room_items or "boat" in room_items or "traffic light" in room_items or "bird" in room_items or "kite" in room_items):
         
-        room_type = "house"
+        room_type = ["house"]
         
     elif("sofa" in room_items or "tvmonitor" in room_items ):
         
-        room_type="living_room"
+        room_type=["living_room"]
         
     elif("chair" in room_items and "diningtable" in room_items):
         
-        room_type="dinning_room"
+        room_type=["dinning_room"]
         
     elif("bed" in room_items):
         
-        room_type="bedroom"
+        room_type = ["bedroom"]
         
-    elif(("sink" in room_items and "toilet" in room_items) or "toilet" in room_items or "toothbrush" in room_items) :
+    elif("toilet" in room_items or "toothbrush" in room_items) :
         
-        room_type="bathroom"
+        room_type=["bathroom"]
         
     elif("chair" in room_items):
         
-        room_type = random.choice(["kitchen", "living_room", "dinning_room"])
+        room_type = [random.choice(["kitchen", "living_room", "dinning_room"]),"kitchen", "living_room", "dinning_room"]
         
     elif("diningtable" in room_items):
        
-        room_type = random.choice(["kitchen", "living_room", "dinning_room"])
+        room_type = [random.choice(["kitchen", "living_room", "dinning_room"]),"kitchen", "living_room", "dinning_room"]
+
+    elif("sink" in room_items):
+
+        room_type = [random.choice(["kitchen", "bathroom"]), "kitchen", "bathroom"]
         
     else:
         
-        room_type = random.choice(["kitchen", "living_room", "dinning_room", "bathroom"])
+        room_type = [random.choice(["house", "house", "house", "house", "kitchen", "living_room", "dinning_room", "bathroom"]),"house","kitchen", "living_room", "dinning_room", "bathroom"]
     
     logger.debug("Done with Task 1 for file {0}".format(file_path))
-    return labels_task2[labels_task2.index(room_type)]
+    return room_type
 
 
 def task_3(file_path: str) -> Tuple[str, str]:
